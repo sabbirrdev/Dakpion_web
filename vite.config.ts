@@ -8,7 +8,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://dakpion-server-n2gd.onrender.com/',
         changeOrigin: true,
       },
     },
