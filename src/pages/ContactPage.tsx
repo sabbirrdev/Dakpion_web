@@ -37,13 +37,13 @@ export function ContactPage() {
       icon: Mail,
       label: t('contact.emailLabel'),
       value: t('contact.emailValue'),
-      href: 'mailto:support@dakpion.com',
+      href: 'mailto:msrtechnologiesbd@gmail.com',
     },
     {
       icon: Phone,
       label: t('contact.phoneLabel'),
       value: t('contact.phoneValue'),
-      href: 'tel:+8801700000000',
+      href: 'tel:+8801771243165',
     },
     {
       icon: MapPin,
