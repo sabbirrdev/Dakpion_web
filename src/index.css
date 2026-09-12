@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Fonts: SolaimanLipi (Web Portal & UI) and Kalpana Unicode (Letters)
+--------------------------------------------------------------------- */
+@font-face {
+  font-family: 'SolaimanLipi';
+  src: url('/fonts/SolaimanLipi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalpana';
+  src: url('/fonts/Kalpana%20UNICODE.ttf') format('truetype'),
+       url('/fonts/KalpanaUnicode.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalpana UNICODE';
+  src: url('/fonts/Kalpana%20UNICODE.ttf') format('truetype'),
+       url('/fonts/KalpanaUnicode.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------
+   Design tokens — "a writing desk at dusk": deep postal-ink navy chrome
+   holding warm parchment paper, a wax-seal red accent, and a muted gold
+   for postmark detailing. See design notes in README.md.
+--------------------------------------------------------------------- */
+@theme {
+  --color-ink: #16233d;       /* primary chrome background */
+  --color-ink-2: #1f314f;     /* card/section surface on ink */
+  --color-ink-3: #2a3e60;     /* borders/hairlines on ink */
+  --color-parchment: #f2e7d0; /* letter paper surface */
+  --color-parchment-2: #e9dabb;
+  --color-kraft: #c9a876;     /* envelope / warm accent */
+  --color-seal: #a63d40;      /* wax seal red — primary CTA accent */
+  --color-seal-dark: #832f32;
+  --color-gold: #c9a227;      /* postmark gold — secondary accent */
+  --color-charcoal: #241c14;  /* ink text on parchment */
+
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  --font-display-latin: 'Fraunces', ui-serif, Georgia, serif;
+  --font-body-latin: 'Inter', system-ui, sans-serif;
+  --font-display-bengali: 'SolaimanLipi', 'Tiro Bangla', ui-serif, serif;
+  --font-body-bengali: 'SolaimanLipi', 'Hind Siliguri', system-ui, sans-serif;
+  --font-letter-bengali: 'Kalpana', 'Kalpana UNICODE', 'KalpanaUnicode', 'SolaimanLipi', serif;
+
+  color-scheme: light;
+}
+
+.font-letter {
+  font-family: var(--font-letter-bengali) !important;
+}
+
+.font-solaiman {
+  font-family: 'SolaimanLipi', 'Hind Siliguri', system-ui, sans-serif !important;
+}
+
+html[data-script='bengali'] {
+  --font-display: var(--font-display-bengali) !important;
+  --font-body: var(--font-body-bengali) !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-parchment);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Slightly generous line-height for Bengali script legibility */
+html[data-script='bengali'] body {
+  line-height: 1.7;
+}
+
+::selection {
+  background: var(--color-seal);
+  color: var(--color-parchment);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* subtle paper grain used behind the writing pad */
+.bg-paper-grain {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(36, 28, 20, 0.03) 0, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(36, 28, 20, 0.04) 0, transparent 45%);
+}
+
+.bg-ink-vignette {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201, 162, 39, 0.10), transparent 60%),
+    var(--color-ink);
+}
+
+/* thin scrollbar for the writing pad, quietly styled */
+textarea.letter-pad::-webkit-scrollbar {
+  width: 6px;
+}
+textarea.letter-pad::-webkit-scrollbar-thumb {
+  background: rgba(36, 28, 20, 0.2);
+  border-radius: 3px;
+}
+
+/* Tiptap rich text styling inside themed letter pads */
+.tiptap-dakpion .ProseMirror {
+  outline: none !important;
+  min-height: 180px;
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+.tiptap-dakpion .ProseMirror p {
+  margin-bottom: 0.85em;
+}
+
+.tiptap-dakpion .ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.tiptap-dakpion .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: currentColor;
+  opacity: 0.35;
+  pointer-events: none;
+  height: 0;
+}
